@@ -1,5 +1,9 @@
 const cleanStr = (title, Brackets) => {
-    let str = title
+    let [taskNumber, taskTitle] = title.split("]");
+    
+    taskNumber = taskNumber.replaceAll("[", "").trim();
+    
+    taskTitle = taskTitle
         .replaceAll('"', "")
         .replaceAll(" - Softermii JIRA", "")
         .replaceAll("- softermii jira", "")
@@ -7,12 +11,13 @@ const cleanStr = (title, Brackets) => {
         .replaceAll("]", "")
         .replaceAll("FE:", "")
         .replaceAll("BE:", "")
-        .replaceAll("  ", " ");
+        .replaceAll("  ", " ")
+        .trim();
 
     if (Brackets) {
-        return `[${str.slice(0, 8)}]${str.slice(8)}`;
+        return `[${taskNumber}] ${taskTitle}`;
     }
-    return `${str.slice(0, 8)}_${str.slice(9)}`;
+    return `${taskNumber}_${taskTitle}`;
 };
 
 const copy = (str) => {
@@ -52,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { currentWindow: true, active: true },
             function (tabs) {
                 const activeTab = tabs[0];
-                title += cleanStr(activeTab.title.toLocaleLowerCase());
+                title += cleanStr(activeTab.title).toLocaleLowerCase();
                 copy(title);
             }
         );
@@ -64,9 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
             { currentWindow: true, active: true },
             function (tabs) {
                 const activeTab = tabs[0];
-                title += cleanStr(activeTab.title.toLocaleLowerCase());
+                title += cleanStr(activeTab.title).toLocaleLowerCase();
                 copy(title);
             }
         );
     });
 });
+
