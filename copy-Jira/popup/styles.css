@@ -1,0 +1,15 @@
+.container {
+    width: 184px !important;
+}
+
+.btn-row {
+    display: flex;
+    gap: 5px;
+}
+
+.line {
+    height: 1px;
+    background: #696969;
+    width: 100%;
+    margin: 7px 0;
+}
