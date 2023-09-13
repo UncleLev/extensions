@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Reals remover",
+    "version": "1.0",
+    "description": "The description of your extension",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "permissions": ["tabs", "activeTab"]
+    },
+    "content_scripts": [
+        {
+            "js": ["./content.js"],
+            "matches": ["*://www.instagram.com/*","*://www.youtube.com/*" ],
+            "run_at": "document_end"
+        }
+    ]
+}
